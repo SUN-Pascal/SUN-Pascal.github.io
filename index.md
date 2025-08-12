@@ -6,6 +6,5 @@ layout: single
 author_profile: true
 ---
 **Welcome to my homepage**! 
-<p style="font-size: 18px;">
 
 On this website, you could find information regarding my research and teaching activities. 
