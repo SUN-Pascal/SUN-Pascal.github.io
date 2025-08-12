@@ -61,9 +61,6 @@ author:
   avatar : "/assets/images/avatar.jpg"
   bio    : "Current MPhil student interested in statistics."
   links:
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/PascalSCF"
@@ -78,7 +75,7 @@ footer:
       url: "https://github.com/PascalSCF"
     - label: "Linkedin"
       icon: "fab fa-fw fa-linkedin"
-      url: "www.linkedin.com/in/pascalsun"
+      url: "https://linkedin.com/in/pascalsun"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       url: "https://instagram.com/"
