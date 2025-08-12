@@ -7,4 +7,4 @@ author_profile: true
 ---
 **Welcome to my homepage**! 
 
-On this website, you could find information regarding my research and teaching activities. 
+On this website, you could find information regarding my research and teaching activities.
