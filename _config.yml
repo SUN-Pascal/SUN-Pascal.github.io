@@ -13,7 +13,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: MM
+title: SUN Cho Fei(Pascal)
 email:
 description: >- # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
@@ -60,29 +60,26 @@ plugins:
 author:
   name   : "Cho Fei SUN (Pascal)"
   avatar : "/assets/images/avatar.jpg"
-  bio    : "All models are wrong, but some are useful."
+  bio    : "Current MPhil student interested in statistics."
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
       url: "https://"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      url: "https://github.com/PascalSCF"
+    - label: "Linkedin"
+      icon: "fab fa-fw fa-linkedin"
+      url: "www.linkedin.com/in/pascalsun"
 
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
+      url: "https://github.com/PascalSCF"
+    - label: "Linkedin"
+      icon: "fab fa-fw fa-linkedin"
+      url: "www.linkedin.com/in/pascalsun"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       url: "https://instagram.com/"
