@@ -1,6 +1,7 @@
 ---
 permalink: /about/
 title: "About Me"
+author_profile: true
 ---
   
 Hello! My name is SUN Cho Fei (Pascal). I am currently studying MPhil in Statistics under the supervision of [Professor YAU Chun Yip](https://www.sta.cuhk.edu.hk/cyyau/). My research interests focus on Extreme Value Theory, Environmental Statistics and Time Series Analysis.
