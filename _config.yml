@@ -59,7 +59,7 @@ plugins:
 author:
   name   : "Pascal"
   avatar : "/assets/images/avatar.jpg"
-  bio    : "All models are wrong, but some are useful."
+  bio    : "MPhil in Stat, CUHK"
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
