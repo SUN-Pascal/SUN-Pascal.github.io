@@ -57,7 +57,7 @@ plugins:
   - jekyll-include-cache
 
 author:
-  name   : "Cho Fei SUN (Pascal)"
+  name   : "Pascal"
   avatar : "/assets/images/avatar.jpg"
   bio    : "Current MPhil student interested in statistics."
   links:
