@@ -4,7 +4,7 @@ title: "Teaching"
 ---
 ## 2025 - 2026 T1
 
-I am the **TA** for the following courses.
+I am one of the **TAs** for the following courses.
 
 ### RMSC4003 — Statistical Modelling in Financial Markets
 
