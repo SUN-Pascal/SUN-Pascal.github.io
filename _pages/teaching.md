@@ -2,7 +2,6 @@
 permalink: /teaching/
 title: "Teaching"
 ---
-
 ## 2025 - 2026 T1
 
 I am the **TA** for the following courses.
