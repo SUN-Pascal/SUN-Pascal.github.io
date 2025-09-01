@@ -19,7 +19,7 @@ This course introduces key models in financial statistics.
 ### RMSC6002 — Credit Risk Management
 
 **Overview:**  
-This course examines the evolution of credit risk management and risk measurement methods.
+This course examines the evolution of credit risk management and introduces risk measurement methods.
 
 ---
 
