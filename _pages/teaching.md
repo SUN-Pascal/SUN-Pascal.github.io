@@ -1,7 +1,6 @@
 ---
 permalink: /teaching/
 title: "Teaching"
-layout: default
 ---
 
 # Teaching 2025 - 2026 T1
