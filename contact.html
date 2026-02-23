@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/images/avatar.jpg">
+<link rel="stylesheet" href="assets/css/styles.css">
+<script src="assets/js/theme.js" defer></script>
+<title>Pascal Sun</title>
+
+<script>
+(function(){
+  try{
+    const t = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const theme = (t === "light" || t === "dark") ? t : (prefersDark ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", theme);
+  }catch(e){}
+})();
+</script>
+
+
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img class="brand-avatar" src="assets/images/avatar.jpg" alt="Avatar">
+      <span class="brand-name">Pascal Sun</span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="about.html">About</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="publications.html">Publications</a>
+      <a href="cv.html">CV</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <h1 class="page-title">Contact</h1>
+    <p class="page-subtitle">How to reach me.</p>
+    <div class="prose">
+      
+<p>Email: <a href="mailto:pascalsun@link.cuhk.edu.hk">pascalsun@link.cuhk.edu.hk</a></p>
+<p>Address: LSB 101, CUHK</p>
+
+<hr class="sep">
+
+<ul>
+  <li><strong>Email</strong>: <a href="mailto:you@example.com">you@example.com</a></li>
+  <li><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/in/YOUR-LINKEDIN">https://www.linkedin.com/in/YOUR-LINKEDIN</a></li>
+  <li><strong>GitHub</strong>: <a href="https://github.com/sun-pascal">https://github.com/sun-pascal</a></li>
+</ul>
+
+<p class="muted">Edit <code>contact.html</code> and the links in <code>index.html</code> / <code>about.html</code>.</p>
+
+    </div>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="muted">© <span id="year"></span> Pascal Sun · Built with plain HTML/CSS/JS</div>
+    <div class="footer-links">
+      <a href="cv.html">Download CV</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+  <span class="theme-icon" aria-hidden="true"></span>
+</button>
+
+</body>
+</html>

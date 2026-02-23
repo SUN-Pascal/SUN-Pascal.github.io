@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/images/avatar.jpg">
+<link rel="stylesheet" href="assets/css/styles.css">
+<script src="assets/js/theme.js" defer></script>
+<title>Pascal Sun</title>
+
+<script>
+(function(){
+  try{
+    const t = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const theme = (t === "light" || t === "dark") ? t : (prefersDark ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", theme);
+  }catch(e){}
+})();
+</script>
+
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img class="brand-avatar" src="assets/images/avatar.jpg" alt="Avatar">
+      <span class="brand-name">Pascal Sun</span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="about.html">About</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="publications.html">Publications</a>
+      <a href="cv.html">CV</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <section class="hero">
+      <aside class="profile-card">
+        <img class="profile-photo" src="assets/images/portrait.jpg" alt="Portrait photo">
+        <div class="profile-body">
+          <p class="profile-name">Pascal Sun</p>
+          <p class="profile-tagline">Statistics • Spatio‑temporal modelling • Change‑point & boundary detection</p>
+
+          <div class="icon-row" aria-label="Social links">
+            <a class="icon-btn" href="https://www.linkedin.com/in/YOUR-LINKEDIN" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0.5 23.5h4V7.5h-4v16zM8 7.5h3.8v2.2h.05c.53-1 1.82-2.2 3.75-2.2 4.01 0 4.75 2.64 4.75 6.07v9.93h-4v-8.8c0-2.1-.04-4.8-2.92-4.8-2.93 0-3.38 2.29-3.38 4.65v8.95H8v-16z"/></svg></a>
+            <a class="icon-btn" href="https://github.com/sun-pascal" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.86.5 12.48c0 5.29 3.44 9.77 8.2 11.35.6.12.82-.27.82-.6v-2.2c-3.34.75-4.04-1.37-4.04-1.37-.55-1.43-1.34-1.81-1.34-1.81-1.1-.78.08-.77.08-.77 1.22.09 1.86 1.3 1.86 1.3 1.08 1.92 2.84 1.37 3.53 1.05.11-.81.42-1.37.76-1.68-2.66-.31-5.46-1.38-5.46-6.14 0-1.36.46-2.47 1.22-3.34-.12-.31-.53-1.57.12-3.27 0 0 1-.33 3.3 1.27a11 11 0 0 1 3-.42c1.02 0 2.05.14 3 .42 2.3-1.6 3.3-1.27 3.3-1.27.65 1.7.24 2.96.12 3.27.76.87 1.22 1.98 1.22 3.34 0 4.78-2.8 5.82-5.48 6.13.43.39.82 1.16.82 2.34v3.47c0 .33.22.72.83.6 4.75-1.58 8.18-6.06 8.18-11.35C23.5 5.86 18.35.5 12 .5z"/></svg></a>
+            <a class="icon-btn" href="mailto:you@example.com" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6.5A3.5 3.5 0 0 1 5.5 3h13A3.5 3.5 0 0 1 22 6.5v11A3.5 3.5 0 0 1 18.5 21h-13A3.5 3.5 0 0 1 2 17.5v-11zm3.1-.6 6.5 5.2c.25.2.6.2.85 0l6.45-5.2a1.5 1.5 0 0 0-.4-.05h-13a1.5 1.5 0 0 0-.4.05zm14.9 2.3-5.9 4.75a3.2 3.2 0 0 1-4.2 0L4 8.2v9.3A1.5 1.5 0 0 0 5.5 19h13a1.5 1.5 0 0 0 1.5-1.5V8.2z"/></svg></a>
+            <a class="icon-btn" href="assets/files/CV.pdf" aria-label="Download CV"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h7l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm7 1.5V8h4.5L13 3.5zM8 12h8v1.8H8V12zm0 4h8v1.8H8V16z"/></svg></a>
+          </div>
+
+          <div class="btn-row">
+            <a class="btn primary" href="about.html">About me</a>
+            <a class="btn" href="teaching.html">Teaching</a>
+            <a class="btn" href="cv.html">CV</a>
+          </div>
+        </div>
+      </aside>
+
+      <div class="content">
+        <h1>Hi — I’m Pascal.</h1>
+        <p class="lede">
+          This is my academic homepage. I work on statistical modelling and machine learning with an emphasis on
+          <strong>change‑point / boundary detection</strong>, <strong>spatio‑temporal methods</strong>, and
+          <strong>reliable uncertainty quantification</strong>.
+          <span class="kbd">Tip</span> Use the bottom‑right button to switch light/dark mode.
+        </p>
+
+        <div class="cards">
+          <div class="card">
+            <h2>Research interests</h2>
+            <p>Scan statistics · spatio‑temporal models · conformal inference · robust detection.</p>
+          </div>
+          <div class="card">
+            <h2>Currently</h2>
+            <p>Building confidence sets for 2‑D boundaries and evaluating them with simulation.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Quick links</h2>
+          <div class="btn-row">
+            <a class="btn" href="publications.html">Selected publications</a>
+            <a class="btn" href="contact.html">Contact</a>
+            <a class="btn" href="assets/files/CV.pdf" download>Download CV (PDF)</a>
+          </div>
+        </div>
+
+        <hr class="sep">
+
+        <div class="section">
+          <h2>About</h2>
+          <div class="prose">
+            <p>Hello! My name is SUN Cho Fei (Pascal). I am currently pursuing MPhil in Statistics under the supervision of <a href="https://www.sta.cuhk.edu.hk/cyyau/">Professor YAU Chun Yip</a>. My research interests focus on Extreme Value Theory, Environmental Statistics and Time Series Analysis.</p>
+<p>Before joinning Professor YAU&#x27;s team, I received my BSc in Risk Management Science from CUHK (The Chinese University of Hong Kong) with First Class Honours.</p>
+<p>In my free time, I enjoy playing basketball, hiking as well as exploring different cities around the world.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="muted">© <span id="year"></span> Pascal Sun · Built with plain HTML/CSS/JS</div>
+    <div class="footer-links">
+      <a href="cv.html">Download CV</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+  <span class="theme-icon" aria-hidden="true"></span>
+</button>
+
+</body>
+</html>

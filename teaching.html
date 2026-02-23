@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/images/avatar.jpg">
+<link rel="stylesheet" href="assets/css/styles.css">
+<script src="assets/js/theme.js" defer></script>
+<title>Pascal Sun</title>
+
+<script>
+(function(){
+  try{
+    const t = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const theme = (t === "light" || t === "dark") ? t : (prefersDark ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", theme);
+  }catch(e){}
+})();
+</script>
+
+
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img class="brand-avatar" src="assets/images/avatar.jpg" alt="Avatar">
+      <span class="brand-name">Pascal Sun</span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="about.html">About</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="publications.html">Publications</a>
+      <a href="cv.html">CV</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <h1 class="page-title">Teaching</h1>
+    <p class="page-subtitle">Past and current teaching duties.</p>
+    <div class="prose">
+      
+<h2>2025 - 2026 T1</h2>
+<p>I am one of the <strong>TAs</strong> for the following courses.</p>
+<h3>RMSC4003 — Statistical Modelling in Financial Markets</h3>
+<p><strong>Tutorial Notes:</strong></p>
+<ul>
+<li>More to come...</li>
+</ul>
+<p><strong>Overview:</strong></p>
+<p>This course introduces key models in financial statistics.</p>
+<p>---</p>
+<h3>RMSC6002 — Credit Risk Management</h3>
+<p><strong>Overview:</strong></p>
+<p>This course examines the evolution of credit risk management and introduces risk measurement methods.</p>
+<p>---</p>
+<h3>Contact</h3>
+<ul>
+<li><strong>Email:</strong> pascalsun@link.cuhk.edu.hk</li>
+<li><strong>Consultation:</strong> Through appointment · responses within 24–48h</li>
+</ul>
+
+<hr class="sep">
+
+<h2>Teaching snapshot (optional table)</h2>
+<table class="table" aria-label="Teaching table">
+  <thead>
+    <tr><th>Term</th><th>Course</th><th>Role</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>YYYY‑YYYY</td>
+      <td>Course code / title</td>
+      <td>TA / Tutor</td>
+      <td>Replace with your actual duties.</td>
+    </tr>
+  </tbody>
+</table>
+
+    </div>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="muted">© <span id="year"></span> Pascal Sun · Built with plain HTML/CSS/JS</div>
+    <div class="footer-links">
+      <a href="cv.html">Download CV</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+  <span class="theme-icon" aria-hidden="true"></span>
+</button>
+
+</body>
+</html>
