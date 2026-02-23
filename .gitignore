@@ -1,0 +1,34 @@
+# OS / filesystem
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node / build artifacts (only relevant if you add tooling later)
+node_modules/
+dist/
+build/
+.cache/
+.parcel-cache/
+.npm/
+.pnpm-debug.log*
+yarn-error.log*
+npm-debug.log*
+
+# Python (only if you ever add scripts)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Jekyll (only if you ever re-enable it)
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Logs
+*.log
