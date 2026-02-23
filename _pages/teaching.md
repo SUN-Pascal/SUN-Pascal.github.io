@@ -1,28 +1,31 @@
 ---
-permalink: /teaching/
 title: "Teaching"
+permalink: /teaching/
+toc: true
+toc_label: "On this page"
 ---
-## 2025 - 2026 T1
 
-I am one of the **TAs** for the following courses.
+## 2025–2026 (Term 1)
 
 ### RMSC4003 — Statistical Modelling in Financial Markets
+**Role:** Teaching Assistant  
+**What I do:** tutorials, consultation, and support for coursework.
 
-**Tutorial Notes:**   
-- More to come...
-
-**Overview:**  
-This course introduces key models in financial statistics.
+**Materials (selected):**
+- Tutorial notes: *coming soon*
 
 ---
 
 ### RMSC6002 — Credit Risk Management
-
-**Overview:**  
-This course examines the evolution of credit risk management and introduces risk measurement methods.
+**Role:** Teaching Assistant  
+**What I do:** tutorials, consultation, and support for coursework.
 
 ---
 
-### Contact
-- **Email:** pascalsun@link.cuhk.edu.hk  
-- **Consultation:** Through appointment · responses within 24–48h
+## Office hours / consultation
+- Email: **pascalsun@link.cuhk.edu.hk**  
+- Consultation: by appointment (reply within 24–48h)
+
+<div class="callout">
+  If you are a student in my tutorial group, please include your **course code** and **tutorial number** in the email subject.
+</div>

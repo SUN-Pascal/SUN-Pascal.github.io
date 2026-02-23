@@ -1,6 +1,15 @@
 ---
-permalink: /publications/
 title: "Publications"
+permalink: /publications/
+toc: true
+toc_label: "Sections"
 ---
-  
-Coming Soon !
+
+## Working papers
+- *To be added.*
+
+## Projects / notes
+- *To be added.*
+
+## Talks
+- *To be added.*
