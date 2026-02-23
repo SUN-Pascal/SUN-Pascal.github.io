@@ -88,6 +88,7 @@ a:hover{text-decoration:underline}
 .nav a:hover{opacity:1; text-decoration:none}
 
 .header-actions{
+  margin-left: auto;
   display:flex;
   align-items:center;
   gap:10px;
@@ -119,19 +120,32 @@ main{padding:32px 0 50px}
   align-items:start;
 }
 @media (max-width: 900px){
-  .hero{grid-template-columns:1fr}
-  .nav{display:none}
-  .nav-toggle{display:block}
+  .nav{ display:none; }
+
+  .nav-toggle{ display:block; }
+
+  /* When opened, show a dropdown under the header */
+  .site-header{ position:sticky; } /* already sticky, keeps dropdown attached */
+
   .nav.open{
     display:flex;
+    position:absolute;
+    left:0;
+    right:0;
+    top:100%;
     flex-direction:column;
     align-items:flex-start;
-    width:100%;
-    padding:12px 0 0;
-    border-top:1px solid var(--border);
-    margin-top:12px;
+    gap:10px;
+    background:var(--bg);
+    border-bottom:1px solid var(--border);
+    padding:12px 0;
   }
-  .header-inner{flex-wrap:wrap}
+  .nav.open a{
+    width:100%;
+    padding:8px 20px;
+  }
+
+  .header-inner{ position:relative; } /* makes dropdown position correctly */
 }
 
 .profile-card{
@@ -307,6 +321,7 @@ hr.sep{
   display:grid;
   place-items:center;
   cursor:pointer;
+  color: var(--text); 
 }
 .theme-toggle:hover{transform:translateY(-1px)}
 .theme-icon{

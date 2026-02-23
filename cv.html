@@ -26,7 +26,6 @@
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="index.html">
-      <img class="brand-avatar" src="assets/images/avatar.jpg" alt="Avatar">
       <span class="brand-name">Pascal Sun</span>
     </a>
 
@@ -36,9 +35,16 @@
       <a href="cv.html">CV</a>
     </nav>
 
-    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="header-actions">
+      <button id="themeToggle" class="theme-toggle" type="button"
+              aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span class="theme-icon" aria-hidden="true"></span>
+      </button>
+
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 
