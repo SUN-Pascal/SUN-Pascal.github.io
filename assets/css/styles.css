@@ -56,7 +56,7 @@ a:hover{text-decoration:underline}
 .header-inner{
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  justify-content:flex-start;
   gap:16px;
   padding:14px 0;
 }
@@ -82,9 +82,16 @@ a:hover{text-decoration:underline}
   gap:18px;
   font-weight:600;
   font-size:14px;
+  margin-left:auto;
 }
 .nav a{color:inherit; opacity:.9}
 .nav a:hover{opacity:1; text-decoration:none}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
 
 .nav-toggle{
   display:none;
@@ -277,7 +284,7 @@ hr.sep{
 
 .site-footer{
   border-top:1px solid var(--border);
-  padding:18px 0 70px;
+  padding:18px 0;
 }
 .footer-inner{
   display:flex;
@@ -291,11 +298,9 @@ hr.sep{
 .footer-links a:hover{color:var(--text); text-decoration:none}
 
 .theme-toggle{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  width:48px;height:48px;
-  border-radius:18px;
+  position:static;
+  width:38px;height:38px;
+  border-radius:12px;
   border:1px solid var(--border);
   background:var(--bg-elev);
   box-shadow:var(--shadow);
