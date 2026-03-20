@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="assets/images/avatar.jpg">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" href="assets/css/styles.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
 <script src="assets/js/theme.js" defer></script>
 <title>About Me · Pascal Sun</title>
 
@@ -48,7 +50,7 @@
 </header>
 
 <main>
-  <div class="container">
+  <div class="container stack-xl">
     <section class="hero" aria-label="Profile section">
       <aside class="profile-card">
         <img class="profile-photo" src="assets/images/portrait.jpg" alt="Portrait photo">
@@ -69,24 +71,30 @@
         </div>
       </aside>
 
-      <div class="content">
+      <div class="content reveal">
         <h1>SUN Cho Fei (Pascal)</h1>
 
         <div class="prose">
           <p>Hello! I am a first year MPhil student and currently supervised by <a href="https://www.sta.cuhk.edu.hk/cyyau/">Professor YAU Chun Yip</a>. My research interests focus on Spatial Statistics, Deep Learning and Time Series Analysis.</p>
-          <p>Before joinning Professor YAU's team, I received my BSc in Risk Management Science from CUHK (The Chinese University of Hong Kong) with First Class Honours.</p>
-          <p>In my free time, I enjoy playing basketball, hiking as well as exploring different cities around the world.</p>
-        </div>
-
+          <p>Before joining Professor YAU's team, I received my BSc in Risk Management Science from CUHK (The Chinese University of Hong Kong) with First Class Honours.</p>
+          <p>In my free time, I enjoy playing basketball, hiking, and exploring different cities around the world.</p>
         </div>
       </div>
     </section>
+
+    <section class="map-section reveal" aria-label="Visitor location map">
+      <div class="map-head">
+        <div>
+          <p class="page-subtitle">Interactive global map with approximate IP-based visit locations.</p>
+        </div>
+        <div class="map-stats" aria-live="polite">
+          <p><strong id="visitorCount">0</strong> pins tracked</p>
+          <p id="visitorLocation" class="muted">Locating this visit...</p>
+        </div>
+      </div>
+      <div id="worldMap" class="world-map" role="img" aria-label="World map showing visitor locations"></div>
+    </section>
   </div>
-  
-
-
-
-
 </main>
 
 <footer class="site-footer">

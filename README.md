@@ -2,11 +2,24 @@
 
 This website is **plain HTML/CSS/JS** (no Jekyll theme).
 
+## Local Run (with visitor map backend)
+This repo now includes a lightweight Node backend endpoint:
+- `GET /api/visitor-pins`
+- `POST /api/visitor-pins`
+
+Run locally:
+1. `npm start`
+2. Open `http://localhost:8000`
+
+Data is stored in `backend/visitor-pins.json`.
+
 ## Deploy on GitHub Pages
 1. Put all files in your repository root.
 2. Enable GitHub Pages: Settings → Pages → Build and deployment → Source: `Deploy from a branch`
 3. Choose branch `main` (or `master`) and folder `/ (root)`.
 4. Visit your GitHub Pages URL.
+
+Note: GitHub Pages cannot run Node endpoints. On GitHub Pages, the map falls back to browser-local pin storage.
 
 ## Update essentials
 - Portrait: `assets/images/portrait.jpg`

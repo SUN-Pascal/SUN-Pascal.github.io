@@ -1,0 +1,9 @@
+{
+  "name": "sun-pascal-website",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Personal website with lightweight visitor-map backend",
+  "scripts": {
+    "start": "node backend/server.js"
+  }
+}
