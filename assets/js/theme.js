@@ -1,6 +1,6 @@
 /*
   Theme + mobile nav + visitor map.
-  - Stores theme and map pins in localStorage.
+  - Stores theme and visitor pins in localStorage.
   - Visitor map uses approximate IP geolocation.
 */
 (function(){
@@ -8,6 +8,7 @@
   const pinStorageKey = "visitorMapPins";
   const pinApiEndpoint = "/api/visitor-pins";
   const root = document.documentElement;
+  const MAX_LOCAL_PINS = 80;
 
   function systemPrefersDark(){
     return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -36,7 +37,7 @@
   }
 
   function savePins(pins){
-    localStorage.setItem(pinStorageKey, JSON.stringify(pins.slice(-40)));
+    localStorage.setItem(pinStorageKey, JSON.stringify(pins.slice(-MAX_LOCAL_PINS)));
   }
 
   async function fetchServerPins(){
@@ -44,7 +45,7 @@
     if(!res.ok) throw new Error("Backend unavailable");
     const data = await res.json();
     if(!data || !Array.isArray(data.pins)) throw new Error("Invalid backend response");
-    return data.pins;
+    return data;
   }
 
   async function postServerPin(pin){
@@ -56,7 +57,7 @@
     if(!res.ok) throw new Error("Pin submission failed");
     const data = await res.json();
     if(!data || !Array.isArray(data.pins)) throw new Error("Invalid backend response");
-    return data.pins;
+    return data;
   }
 
   function setMapText(id, text){
@@ -64,9 +65,13 @@
     if(el) el.textContent = text;
   }
 
-  function updatePinCount(pins){
+  function updatePinCount(count){
     const el = document.getElementById("visitorCount");
-    if(el) el.textContent = String(pins.length);
+    if(el) el.textContent = String(count);
+  }
+
+  function updateVisitorIp(ip){
+    setMapText("visitorIp", ip ? `IP: ${ip}` : "IP: unavailable");
   }
 
   function mapPinLabel(pin){
@@ -83,33 +88,102 @@
       fillOpacity: 0.82
     });
 
-    const date = new Date(pin.recordedAt).toLocaleString();
+    const date = pin.recordedAt ? new Date(pin.recordedAt).toLocaleString() : "Unknown time";
     const label = mapPinLabel(pin);
-    marker.bindPopup(`<strong>${isCurrent ? "Current visit" : "Saved visit"}</strong><br>${label}<br><span>${date}</span>`);
+    const ipLine = pin.ip ? `<br><span>IP: ${pin.ip}</span>` : "";
+    const visitLine = typeof pin.visits === "number" ? `<br><span>Visits: ${pin.visits}</span>` : "";
+    marker.bindPopup(`<strong>${isCurrent ? "Current visit" : "Saved visit"}</strong><br>${label}${ipLine}${visitLine}<br><span>${date}</span>`);
     marker.addTo(map);
   }
 
-  async function fetchApproxLocation(){
-    const res = await fetch("https://ipwho.is/", { cache: "no-store" });
-    if(!res.ok) throw new Error("Location service unavailable");
-    const data = await res.json();
+  function normalizeGeoResult(data){
+    const lat = Number(data.latitude ?? data.lat);
+    const lng = Number(data.longitude ?? data.lon ?? data.lng);
 
-    if(!data || data.success === false || typeof data.latitude !== "number" || typeof data.longitude !== "number"){
-      throw new Error("Invalid location response");
+    if(!Number.isFinite(lat) || !Number.isFinite(lng)){
+      throw new Error("Missing coordinates");
     }
 
     return {
-      lat: data.latitude,
-      lng: data.longitude,
+      ip: String(data.ip || "").trim(),
+      lat,
+      lng,
       city: data.city || "",
-      region: data.region || "",
-      country: data.country || "",
-      recordedAt: new Date().toISOString()
+      region: data.region || data.regionName || "",
+      country: data.country || data.country_name || "",
+      recordedAt: new Date().toISOString(),
+      visits: 1
     };
+  }
+
+  async function fetchApproxLocation(){
+    const providers = [
+      {
+        url: "https://ipwho.is/",
+        parse(data){
+          if(!data || data.success === false) throw new Error("ipwho.is failed");
+          return normalizeGeoResult(data);
+        }
+      },
+      {
+        url: "https://ipapi.co/json/",
+        parse(data){
+          if(!data || data.error) throw new Error("ipapi failed");
+          return normalizeGeoResult(data);
+        }
+      },
+      {
+        url: "https://ip-api.com/json/?fields=status,message,country,regionName,city,lat,lon,query",
+        parse(data){
+          if(!data || data.status !== "success") throw new Error(data && data.message ? data.message : "ip-api failed");
+          return normalizeGeoResult({
+            ip: data.query,
+            lat: data.lat,
+            lon: data.lon,
+            city: data.city,
+            regionName: data.regionName,
+            country: data.country
+          });
+        }
+      }
+    ];
+
+    let lastError = null;
+    for(const provider of providers){
+      try{
+        const res = await fetch(provider.url, { cache: "no-store" });
+        if(!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const location = provider.parse(data);
+        if(!location.ip) location.ip = "Unknown";
+        return location;
+      }catch(err){
+        lastError = err;
+      }
+    }
+
+    throw lastError || new Error("No location providers available");
   }
 
   function isSameArea(a, b){
     return Math.abs(a.lat - b.lat) < 0.35 && Math.abs(a.lng - b.lng) < 0.35;
+  }
+
+  function mergeLocalPins(existingPins, currentPin){
+    const match = existingPins.find((pin) => pin.ip && currentPin.ip && pin.ip === currentPin.ip);
+    if(match){
+      match.lat = currentPin.lat;
+      match.lng = currentPin.lng;
+      match.city = currentPin.city;
+      match.region = currentPin.region;
+      match.country = currentPin.country;
+      match.recordedAt = currentPin.recordedAt;
+      match.visits = (Number(match.visits) || 0) + 1;
+      return existingPins;
+    }
+
+    existingPins.push(currentPin);
+    return existingPins;
   }
 
   async function initVisitorMap(){
@@ -117,6 +191,7 @@
     if(!mapEl) return;
     if(!window.L){
       setMapText("visitorLocation", "Map is unavailable right now.");
+      updateVisitorIp("");
       return;
     }
 
@@ -134,6 +209,7 @@
 
     const markerLayer = window.L.layerGroup().addTo(map);
     let pins = [];
+    let totalVisitors = 0;
 
     function renderPins(allPins, currentPin){
       markerLayer.clearLayers();
@@ -141,46 +217,50 @@
       if(currentPin && !allPins.some((pin) => isSameArea(pin, currentPin))){
         addMarkerToMap(markerLayer, currentPin, true);
       }
-      updatePinCount(allPins);
+      updatePinCount(totalVisitors || allPins.length);
     }
 
     try{
-      pins = await fetchServerPins();
+      const data = await fetchServerPins();
+      pins = data.pins;
+      totalVisitors = Number.isFinite(data.totalVisitors) ? data.totalVisitors : pins.length;
       savePins(pins);
     }catch(_){
       pins = loadPins();
+      totalVisitors = pins.length;
       if(pins.length){
         setMapText("visitorLocation", "Backend offline. Showing cached visitor pins.");
       }
+      updateVisitorIp("");
     }
 
     renderPins(pins, null);
-    updatePinCount(pins);
 
     try{
       const current = await fetchApproxLocation();
       setMapText("visitorLocation", `This visit: ${mapPinLabel(current)}`);
+      updateVisitorIp(current.ip);
 
       let updatedPins = pins;
       try{
-        updatedPins = await postServerPin(current);
+        const data = await postServerPin(current);
+        updatedPins = data.pins;
+        totalVisitors = Number.isFinite(data.totalVisitors) ? data.totalVisitors : updatedPins.length;
         savePins(updatedPins);
       }catch(_){
-        if(!pins.some((pin) => isSameArea(pin, current))){
-          pins.push(current);
-          savePins(pins);
-        }
-        updatedPins = pins;
+        updatedPins = mergeLocalPins(pins, current);
+        totalVisitors = updatedPins.length;
+        savePins(updatedPins);
       }
 
       renderPins(updatedPins, current);
       map.flyTo([current.lat, current.lng], 3, { duration: 1.35 });
     }catch(_){
       setMapText("visitorLocation", "Unable to detect this visit location right now.");
+      updateVisitorIp("");
     }
   }
 
-  // Apply ASAP (prevents flash)
   applyTheme(getTheme());
 
   window.addEventListener("DOMContentLoaded", () => {
