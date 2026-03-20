@@ -5,10 +5,10 @@ const path = require("path");
 const { URL } = require("url");
 
 const PORT = Number(process.env.PORT || 8000);
+const HOST = process.env.HOST || "127.0.0.1";
 const ROOT_DIR = path.resolve(__dirname, "..");
 const DATA_FILE = path.join(__dirname, "visitor-pins.json");
 const MAX_PINS = 400;
-const SAME_AREA_THRESHOLD = 0.35;
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -56,17 +56,29 @@ function normalizePin(pin) {
   if (!pin || !isValidNumber(pin.lat) || !isValidNumber(pin.lng)) return null;
 
   return {
+    ip: typeof pin.ip === "string" ? pin.ip.trim() : "",
     lat: Number(pin.lat),
     lng: Number(pin.lng),
     city: typeof pin.city === "string" ? pin.city : "",
     region: typeof pin.region === "string" ? pin.region : "",
     country: typeof pin.country === "string" ? pin.country : "",
-    recordedAt: typeof pin.recordedAt === "string" && pin.recordedAt ? pin.recordedAt : new Date().toISOString()
+    recordedAt: typeof pin.recordedAt === "string" && pin.recordedAt ? pin.recordedAt : new Date().toISOString(),
+    visits: typeof pin.visits === "number" && Number.isFinite(pin.visits) && pin.visits > 0 ? Math.floor(pin.visits) : 1
   };
 }
 
-function isSameArea(a, b) {
-  return Math.abs(a.lat - b.lat) < SAME_AREA_THRESHOLD && Math.abs(a.lng - b.lng) < SAME_AREA_THRESHOLD;
+function getRequestIp(req) {
+  const forwarded = req.headers["x-forwarded-for"];
+  if (typeof forwarded === "string" && forwarded.trim()) {
+    return forwarded.split(",")[0].trim();
+  }
+
+  const realIp = req.headers["x-real-ip"];
+  if (typeof realIp === "string" && realIp.trim()) {
+    return realIp.trim();
+  }
+
+  return req.socket?.remoteAddress || "";
 }
 
 function parseJsonBody(req) {
@@ -97,7 +109,7 @@ async function handlePinsApi(req, res) {
 
   if (req.method === "GET") {
     const pins = await readPins();
-    send(res, 200, JSON.stringify({ pins }), { "Content-Type": MIME[".json"] });
+    send(res, 200, JSON.stringify({ pins, totalVisitors: pins.length }), { "Content-Type": MIME[".json"] });
     return;
   }
 
@@ -110,14 +122,44 @@ async function handlePinsApi(req, res) {
         return;
       }
 
+      const requestIp = getRequestIp(req);
+      const identity = pin.ip || requestIp;
       const pins = await readPins();
-      if (!pins.some((existing) => isSameArea(existing, pin))) {
-        pins.push(pin);
-        await writePins(pins);
+      const existing = identity ? pins.find((entry) => entry.ip === identity) : null;
+
+      if (existing) {
+        existing.ip = identity;
+        existing.lat = pin.lat;
+        existing.lng = pin.lng;
+        existing.city = pin.city;
+        existing.region = pin.region;
+        existing.country = pin.country;
+        existing.recordedAt = pin.recordedAt;
+        existing.visits = (Number(existing.visits) || 0) + 1;
+      } else {
+        pins.push({
+          ...pin,
+          ip: identity,
+          visits: 1
+        });
       }
 
+      await writePins(pins);
+
       const freshPins = await readPins();
-      send(res, 200, JSON.stringify({ pins: freshPins, current: pin }), { "Content-Type": MIME[".json"] });
+      send(
+        res,
+        200,
+        JSON.stringify({
+          pins: freshPins,
+          totalVisitors: freshPins.length,
+          current: {
+            ...pin,
+            ip: identity
+          }
+        }),
+        { "Content-Type": MIME[".json"] }
+      );
     } catch (err) {
       send(res, 400, JSON.stringify({ error: err.message || "Bad request" }), { "Content-Type": MIME[".json"] });
     }
@@ -178,6 +220,17 @@ const server = http.createServer(async (req, res) => {
   serveStatic(req, res, url.pathname);
 });
 
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  server.listen(PORT, HOST, () => {
+    console.log(`Server running at http://${HOST}:${PORT}`);
+  });
+}
+
+module.exports = {
+  server,
+  handlePinsApi,
+  readPins,
+  writePins,
+  normalizePin,
+  getRequestIp
+};
