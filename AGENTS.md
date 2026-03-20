@@ -127,3 +127,7 @@ When updating this repo:
 - Append a short "Progress Update" section in this file with date + what changed.
 - If new pages/components are added, update the structure tree and navigation rules.
 - If tooling is introduced (linters/build/tests), add exact run commands in Section 6.
+
+## Progress Update
+
+- 2026-03-20: Updated visitor tracking so the homepage shows the detected IP, falls back across multiple geolocation providers, and the Node backend now tracks unique visitors by IP instead of counting approximate map areas.
