@@ -70,10 +70,6 @@
     if(el) el.textContent = String(count);
   }
 
-  function updateVisitorIp(ip){
-    setMapText("visitorIp", ip ? `IP: ${ip}` : "IP: unavailable");
-  }
-
   function mapPinLabel(pin){
     const place = [pin.city, pin.region, pin.country].filter(Boolean).join(", ");
     return place || "Unknown location";
@@ -90,9 +86,8 @@
 
     const date = pin.recordedAt ? new Date(pin.recordedAt).toLocaleString() : "Unknown time";
     const label = mapPinLabel(pin);
-    const ipLine = pin.ip ? `<br><span>IP: ${pin.ip}</span>` : "";
     const visitLine = typeof pin.visits === "number" ? `<br><span>Visits: ${pin.visits}</span>` : "";
-    marker.bindPopup(`<strong>${isCurrent ? "Current visit" : "Saved visit"}</strong><br>${label}${ipLine}${visitLine}<br><span>${date}</span>`);
+    marker.bindPopup(`<strong>${isCurrent ? "Current visit" : "Saved visit"}</strong><br>${label}${visitLine}<br><span>${date}</span>`);
     marker.addTo(map);
   }
 
@@ -191,7 +186,6 @@
     if(!mapEl) return;
     if(!window.L){
       setMapText("visitorLocation", "Map is unavailable right now.");
-      updateVisitorIp("");
       return;
     }
 
@@ -231,7 +225,6 @@
       if(pins.length){
         setMapText("visitorLocation", "Backend offline. Showing cached visitor pins.");
       }
-      updateVisitorIp("");
     }
 
     renderPins(pins, null);
@@ -239,7 +232,6 @@
     try{
       const current = await fetchApproxLocation();
       setMapText("visitorLocation", `This visit: ${mapPinLabel(current)}`);
-      updateVisitorIp(current.ip);
 
       let updatedPins = pins;
       try{
@@ -257,7 +249,6 @@
       map.flyTo([current.lat, current.lng], 3, { duration: 1.35 });
     }catch(_){
       setMapText("visitorLocation", "Unable to detect this visit location right now.");
-      updateVisitorIp("");
     }
   }
 
