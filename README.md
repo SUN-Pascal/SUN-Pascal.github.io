@@ -11,6 +11,8 @@ Run locally:
 1. `npm start`
 2. Open `http://localhost:8000`
 
+If you deploy the Node backend to a hosting platform, set `HOST=0.0.0.0`.
+
 Data is stored in `backend/visitor-pins.json`.
 
 ## Deploy on GitHub Pages
@@ -19,7 +21,7 @@ Data is stored in `backend/visitor-pins.json`.
 3. Choose branch `main` (or `master`) and folder `/ (root)`.
 4. Visit your GitHub Pages URL.
 
-Note: GitHub Pages cannot run Node endpoints. On GitHub Pages, the map falls back to browser-local pin storage.
+Note: GitHub Pages cannot run Node endpoints. On GitHub Pages, the map can still detect the current visitor IP/location in the browser, but site-wide visitor tracking remains browser-local unless you deploy the backend somewhere that can serve /api/visitor-pins.
 
 ## Update essentials
 - Portrait: `assets/images/portrait.jpg`
